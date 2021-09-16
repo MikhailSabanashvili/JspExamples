@@ -18,42 +18,22 @@
 <body>
 <div class="form-style-2">
     <div class="form-style-2-heading">
-        Please, sign up!
+        Please, add user
     </div>
     <!-- Указываем в форме тип запроса, который уйдет со странички на сервер и куда уйдет -->
-    <form method="post" action="${pageContext.request.contextPath}/signUp">
-        <label for="name">User name
-            <input class="input-field" type="text" id="name" name="name">
+    <form method="post" action="${pageContext.request.contextPath}/users">
+        <label for="first-name">First Name
+            <input class="input-field" type="text" id="first-name" name="first-name">
         </label>
         <!-- текст - когда обычный текст, пароль - когда точки -->
-        <label for="birthDate">Birth date
-            <input class="input-field" type="date" id="birthDate" name="birthDate">
-        </label>
-        <label for="password">Password
-            <input class="input-field" type="password" id="password" name="password">
+        <label for="last-name">Last Name
+            <input class="input-field" type="text" id="last-name" name="last-name">
         </label>
         <!-- сделаем кнопочку для отправки -->
-        <input type="submit" value="Sign Up">
+        <input type="submit" value="Add user">
     </form>
 </div>
-<div class="form-style-2">
-    <div class="form-style-2-heading">
-        Already registered:
-    </div>
-    <table>
-        <tr>
-            <th>User name</th>
-            <th>Birth Date</th>
-        </tr>
-        <c:forEach items="${usersFromServer}" var="user">
-            <tr>
-                <td>${user.name}</td>
-                <td>${user.birthDate}</td>
-            </tr>
-        </c:forEach>
 
-    </table>
-</div>
 
 </body>
 </html>
