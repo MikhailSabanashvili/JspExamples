@@ -51,7 +51,7 @@ public class UsersServletWithDao extends HttpServlet {
         Optional<User> user = usersDao.find(2);
         int i = 0;
 
-        List<User> users = null;
+        List<User> users;
         if(req.getParameter("firstName")!=null){
             String firstName = req.getParameter("firstName");
             users = usersDao.findAllByFirstName(firstName);

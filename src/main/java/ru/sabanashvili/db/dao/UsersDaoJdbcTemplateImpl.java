@@ -24,18 +24,23 @@ public class UsersDaoJdbcTemplateImpl implements UsersDao {
     private Map<Integer, User> usersMap = new HashMap<>();
     //правило, по которому строка resultSet-а преобразуется в объект
     //вытаскиваем пользователя и все его машины
+    //прием отображения из реляционного отношения в отношение ООП, когда мы хотим вытащить по сущностям
+    // то бишь object relation mapping - orm
+    //еще вариант использовать jdbc extractor
     private final RowMapper<User> userRowMapper = (resultSet, i) -> {
+        //берем пользак из бд
         Integer id = resultSet.getInt("id");
+        //смотрим, есть ли он в мапе. если нет, то добавляем его
         if(!usersMap.containsKey(id)){
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
             User user = new User(id, firstName, lastName, new ArrayList<>());
             usersMap.put(id, user);
         }
-
+        //если такой пользователь есть, то просто вытаскиваем для него машину
         Car car = new Car(resultSet.getInt("car_id"),
                 resultSet.getString("model"), usersMap.get(id));
-
+        //и добавляем ее в отношение
         usersMap.get(id).getCars().add(car);
         return usersMap.get(id);
     };
